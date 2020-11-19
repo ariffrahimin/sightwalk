@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:sightwalk/Screens/login/login.dart';
 import 'package:sightwalk/Screens/signup/signup.dart';
 import 'package:sightwalk/components/round_button.dart';
+import 'package:sightwalk/services/auth.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
 
-const Body({
-  Key key,
-}) : super(key: key);
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

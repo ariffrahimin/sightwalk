@@ -5,11 +5,17 @@ import 'package:sightwalk/components/round_button.dart';
 import 'package:sightwalk/components/round_input_field.dart';
 import 'package:sightwalk/components/round_password_field.dart';
 import 'package:sightwalk/constants.dart';
+import 'package:sightwalk/services/auth.dart';
 
-class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }): super(key: key);
+class Body extends StatefulWidget {
+
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -42,7 +48,20 @@ class Body extends StatelessWidget {
             RoundPasswordField(
               onChanged: (value){},
             ),
-            SizedBox(height: size.height*0.1,),
+            RoundedButton( 
+              text: 'Anonymous Log In',
+              press: () async{
+               dynamic result = await _auth.signInAnon();
+               if (result == null){
+                 print('error signing in');
+               }else{
+                 print('signed in');
+                 print(result);
+               }
+              },
+              textColor: Colors.black,
+              color: kPrimaryLightColor,
+            ),
             RoundedButton(
               text: 'LOGIN',
               press: (){},

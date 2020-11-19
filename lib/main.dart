@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:sightwalk/Screens/welcome/welcome_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:sightwalk/Screens/wrapper.dart';
+import 'package:sightwalk/screens/welcome/welcome_screen.dart';
 
-void main() => runApp(MaterialApp(
-  debugShowCheckedModeBanner: false,
-  home: WelcomeScreen(),
-  title: 'Sightwalk',
-  ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return MaterialApp(
+      home: Wrapper(),
+      debugShowCheckedModeBanner: false,
       
     );
   }
