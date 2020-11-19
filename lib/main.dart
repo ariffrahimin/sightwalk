@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sightwalk/Screens/home/homescreen.dart';
+import 'package:sightwalk/Screens/welcome/welcome_screen.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
-  home: HomeScreen(),
+  home: WelcomeScreen(),
   title: 'Sightwalk',
   ));
 

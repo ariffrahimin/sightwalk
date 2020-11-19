@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "623998815637",
+    "firebase_url": "https://sightwalk-5abb1.firebaseio.com",
+    "project_id": "sightwalk-5abb1",
+    "storage_bucket": "sightwalk-5abb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623998815637:android:b2ee370a46273fbef1ba9c",
+        "android_client_info": {
+          "package_name": "com.example.sightwalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623998815637-dbmfhl13783md91jn7h8pouirp6c0vfl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1daUFH3c2ealyh5cvx8dP_7UB6_wxsBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623998815637-dbmfhl13783md91jn7h8pouirp6c0vfl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
