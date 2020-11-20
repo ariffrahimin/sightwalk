@@ -33,7 +33,7 @@ class _BodyState extends State<Body> {
             Image(image: AssetImage('lib/asset/images/footsteps.png'),),
             
             RoundedButton(
-              text: "SIGN UP",
+              text: "REGISTER",
               press: (){
                 Navigator.push(
                   context,
