@@ -5,11 +5,24 @@ import 'package:sightwalk/components/round_button.dart';
 import 'package:sightwalk/components/round_input_field.dart';
 import 'package:sightwalk/components/round_password_field.dart';
 import 'package:sightwalk/constants.dart';
+import 'package:sightwalk/services/auth.dart';
 
-class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
+class Body extends StatefulWidget {
+
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
+  //text field state
+  String username = '';
+  String email = '';
+  String password = '';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,7 +36,9 @@ class Body extends StatelessWidget {
           ),
       ),
       child: SingleChildScrollView(
+        
         child: Column(
+          key: _formKey,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(image: AssetImage('lib/asset/images/logo.png'),
@@ -49,7 +64,12 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: 'SIGN UP',
-              press: () {},
+              press: () async{
+                if(_formKey.currentState.validate()){
+                  print(email);
+                  print(password);
+                }
+              },
               textColor: Colors.black,
               color: kPrimaryLightColor,
             ),
