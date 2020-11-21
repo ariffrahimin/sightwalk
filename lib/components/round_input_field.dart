@@ -5,9 +5,11 @@ import 'package:sightwalk/constants.dart';
 class RoundInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
+  final FormFieldValidator validator;
   final ValueChanged<String> onChanged;
   const RoundInputField({
     Key key,
+    this.validator,
     this.hintText,
     this.icon,
     this.onChanged, Icon prefixIcon,
@@ -16,7 +18,8 @@ class RoundInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
+        validator: validator,
         onChanged: onChanged,
         decoration: InputDecoration(
         icon :Icon(
@@ -24,7 +27,6 @@ class RoundInputField extends StatelessWidget {
           color: kPrimaryColor,
         ),
           hintText: hintText, 
-          border: InputBorder.none,
         ),
         //neww comment
       ),

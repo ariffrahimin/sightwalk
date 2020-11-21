@@ -4,15 +4,18 @@ import 'package:sightwalk/constants.dart';
 
 class RoundPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final FormFieldValidator validator;
   const RoundPasswordField({
     Key key,
     this.onChanged,
+    this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
+        validator: validator,
         obscureText: true,
         onChanged: onChanged,
         decoration: InputDecoration(

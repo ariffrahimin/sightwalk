@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:sightwalk/Screens/login/login.dart';
 import 'package:sightwalk/components/exist_acount.dart';
@@ -36,9 +37,10 @@ class _BodyState extends State<Body> {
           ),
       ),
       child: SingleChildScrollView(
-        
+        child: Form(
+        key: _formKey,
         child: Column(
-          key: _formKey,
+          
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(image: AssetImage('lib/asset/images/logo.png'),
@@ -48,17 +50,30 @@ class _BodyState extends State<Body> {
               height: size.height*0.05,
               ),
             RoundInputField(
+              validator: (_username) => _username.isEmpty ? 'Enter an username' : null,
               hintText: 'Username',
               icon: Icons.person,
-              onChanged: (value) {},
+              onChanged: (_username) {
+                setState(() => username = _username);
+              },
             ),
             RoundInputField(
+              validator: (_email)=>_email.isEmpty ? 'Enter an email' : null,
               hintText: 'Email',
               icon: Icons.email,
-              onChanged: (value) {},
+              onChanged: (_email) {
+                setState(() {
+                  email = _email;
+                });
+              },
             ),
             RoundPasswordField(
-              onChanged: (value){},
+              validator: (value) => value.isEmpty ? 'Enter a password' : null,
+              onChanged: (value) {
+                setState(() {
+                  password =value;
+                });
+              },
             ),
             SizedBox(height: size.height*0.1,
             ),
@@ -66,6 +81,7 @@ class _BodyState extends State<Body> {
               text: 'SIGN UP',
               press: () async{
                 if(_formKey.currentState.validate()){
+                  print(username);
                   print(email);
                   print(password);
                 }
@@ -73,6 +89,9 @@ class _BodyState extends State<Body> {
               textColor: Colors.black,
               color: kPrimaryLightColor,
             ),
+        
+        
+            
             ExistAccount(
               login: false,
               press: (){
@@ -87,6 +106,7 @@ class _BodyState extends State<Body> {
 
 
           ],
+        ),
         ),
       ),
       
