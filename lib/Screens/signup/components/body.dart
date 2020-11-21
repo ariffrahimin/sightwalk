@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:sightwalk/Screens/home/home.dart';
 import 'package:sightwalk/Screens/login/login.dart';
 import 'package:sightwalk/components/exist_acount.dart';
 import 'package:sightwalk/components/round_button.dart';
@@ -21,9 +22,9 @@ class _BodyState extends State<Body> {
   final _formKey = GlobalKey<FormState>();
 
   //text field state
-  String username = '';
   String email = '';
   String password = '';
+  String error = '';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -50,14 +51,6 @@ class _BodyState extends State<Body> {
               height: size.height*0.05,
               ),
             RoundInputField(
-              validator: (_username) => _username.isEmpty ? 'Enter an username' : null,
-              hintText: 'Username',
-              icon: Icons.person,
-              onChanged: (_username) {
-                setState(() => username = _username);
-              },
-            ),
-            RoundInputField(
               validator: (_email)=>_email.isEmpty ? 'Enter an email' : null,
               hintText: 'Email',
               icon: Icons.email,
@@ -68,7 +61,7 @@ class _BodyState extends State<Body> {
               },
             ),
             RoundPasswordField(
-              validator: (value) => value.isEmpty ? 'Enter a password' : null,
+              validator: (value) => value.length<6 ? 'Enter a password 6+ chars long' : null,
               onChanged: (value) {
                 setState(() {
                   password =value;
@@ -80,11 +73,32 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: 'SIGN UP',
               press: () async{
-                if(_formKey.currentState.validate()){
-                  print(username);
-                  print(email);
-                  print(password);
-                }
+                   // check the form for empty spots and validity
+                      bool emailValid = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(email);
+                      if (emailValid) {
+                        if (_formKey.currentState.validate()) {
+                          dynamic result = await _auth
+                              .registerWithEmailAndPassword(email, password);
+                          print(result);
+                          
+                          if (result == null) {
+                            setState(() => error = 'Write a valid email');
+                          }
+                          else{
+                            setState(() {
+                              error = ('no error signing in');
+                              print (error);
+                              //make the sign up screen dissapear
+                              Navigator.pop(context); 
+                            });
+                          }
+                        }
+                      } else {
+                        setState(
+                            () => error = 'Write a valid email');
+                      }
               },
               textColor: Colors.black,
               color: kPrimaryLightColor,
