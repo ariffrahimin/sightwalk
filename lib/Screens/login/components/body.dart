@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sightwalk/Screens/signup/signup.dart';
 import 'package:sightwalk/components/exist_acount.dart';
 import 'package:sightwalk/components/round_button.dart';
@@ -16,11 +17,13 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   //text field state
   String email = '';
   String password = '';
   String username = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,8 @@ class _BodyState extends State<Body> {
         ),
       ),
       child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -47,6 +52,7 @@ class _BodyState extends State<Body> {
               height: size.height*0.1,
             ),
             RoundInputField(
+              validator: (_email)=>_email.isEmpty ? 'Enter an email' : null,
               hintText: 'Email',
               icon: Icons.email,
               onChanged: (value){
@@ -56,6 +62,7 @@ class _BodyState extends State<Body> {
               },
             ),
             RoundPasswordField(
+              validator: (value) => value.length<6 ? 'Enter a password 6+ chars long' : null,
               onChanged: (value){
                 setState(() {
                   password = value;
@@ -80,11 +87,37 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: 'LOGIN',
               press: ()async{
-                print(email);
-                print(password);
+                          
+                        if (_formKey.currentState.validate()) {
+                          
+                          dynamic result = await _auth.signinWithEmailAndPassword(email, password);
+                          Fluttertoast.showToast(
+                              msg: "Logging in",
+                              backgroundColor: Colors.green,
+                              textColor: Colors.black,
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              fontSize: 16
+                            );
+                          if(result == null){
+                            setState(() {
+                              error = 'Could not sign in with these credentials';
+                            });
+                          }else{
+                            Navigator.pop(context);
+                            
+                          }
+                        }
               },
               textColor: Colors.black,
               color: kPrimaryLightColor,
+            ),
+            SizedBox(height: 12,
+            ),
+            Text(
+              error,
+              style: TextStyle(color: Colors.red, fontSize: 14),
             ),
             ExistAccount(
               press: () {
@@ -100,6 +133,7 @@ class _BodyState extends State<Body> {
             ),
           ],
         ),
+      ),
       ),
       
     );
