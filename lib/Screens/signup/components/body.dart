@@ -1,5 +1,5 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sightwalk/Screens/home/home.dart';
 import 'package:sightwalk/Screens/login/login.dart';
 import 'package:sightwalk/components/exist_acount.dart';
@@ -81,6 +81,15 @@ class _BodyState extends State<Body> {
                         if (_formKey.currentState.validate()) {
                           dynamic result = await _auth
                               .registerWithEmailAndPassword(email, password);
+                              Fluttertoast.showToast(
+                              msg: "Logging in",
+                              backgroundColor: Colors.green,
+                              textColor: Colors.black,
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              fontSize: 16
+                            );
                           print(result);
                           
                           if (result == null) {
@@ -102,6 +111,12 @@ class _BodyState extends State<Body> {
               },
               textColor: Colors.black,
               color: kPrimaryLightColor,
+            ),
+            SizedBox(height: 12,
+            ),
+            Text(
+              error,
+              style: TextStyle(color: Colors.red, fontSize: 14),
             ),
         
         

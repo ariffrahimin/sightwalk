@@ -7,6 +7,7 @@ import 'package:sightwalk/components/round_input_field.dart';
 import 'package:sightwalk/components/round_password_field.dart';
 import 'package:sightwalk/constants.dart';
 import 'package:sightwalk/services/auth.dart';
+import 'package:sightwalk/components/loading.dart';
 
 class Body extends StatefulWidget {
 
@@ -18,6 +19,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   //text field state
   String email = '';
@@ -28,7 +30,7 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return loading ? Loading() : Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -69,27 +71,15 @@ class _BodyState extends State<Body> {
                 });
               },
             ),
-            // RoundedButton( 
-            //   text: 'Anonymous Log In',
-            //   press: () async{
-            //    dynamic result = await _auth.signInAnon();
-            //    if (result == null){
-            //      print('error signing in');
-            //    }else{
-            //      print('signed in');
-            //      print(result);
-            //    }
-            //   },
-            //   textColor: Colors.black,
-            //   color: kPrimaryLightColor,
-            // ),
             
             RoundedButton(
               text: 'LOGIN',
               press: ()async{
                           
                         if (_formKey.currentState.validate()) {
-                          
+                          setState(() {
+                            loading = true;
+                          });
                           dynamic result = await _auth.signinWithEmailAndPassword(email, password);
                           Fluttertoast.showToast(
                               msg: "Logging in",
@@ -103,6 +93,7 @@ class _BodyState extends State<Body> {
                           if(result == null){
                             setState(() {
                               error = 'Could not sign in with these credentials';
+                              loading = false;
                             });
                           }else{
                             Navigator.pop(context);
