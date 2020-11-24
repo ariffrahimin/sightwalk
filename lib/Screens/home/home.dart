@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sightwalk/screens/camera/camera_screen.dart';
 import 'package:sightwalk/services/auth.dart';
 
 class Home extends StatelessWidget {
@@ -22,6 +23,45 @@ class Home extends StatelessWidget {
             label: Text('logout')
             ),
         ],
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('lib/asset/images/background.png'),
+          alignment: Alignment.topCenter,
+          fit: BoxFit.cover
+          ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            RaisedButton(
+              onPressed:(){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CameraScreen();
+                },));
+              },
+              child: Icon(Icons.camera_alt,
+                          size: 30,),
+              ),
+              SizedBox(height: 12,),
+
+              RaisedButton(
+              onPressed:(){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CameraScreen();
+                },));
+              },
+              child: Icon(Icons.surround_sound,
+                          size: 30,),
+              ),
+
+          ],
+        ),
+      ),
       ),
       
     );
