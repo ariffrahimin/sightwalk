@@ -72,6 +72,7 @@ class _BodyState extends State<Body> {
               },
             ),
             
+            // ignore: missing_required_param
             RoundedButton(
               text: 'LOGIN',
               press: ()async{

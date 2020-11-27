@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sightwalk/Screens/wrapper.dart';
 import 'package:sightwalk/models/user.dart';
-import 'package:sightwalk/screens/welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:sightwalk/services/auth.dart';
 

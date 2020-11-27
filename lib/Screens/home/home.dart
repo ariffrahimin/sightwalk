@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sightwalk/screens/camera/camera_screen.dart';
+import 'package:sightwalk/screens/profile/profile.dart';
 import 'package:sightwalk/services/auth.dart';
 
 class Home extends StatelessWidget {
@@ -52,10 +53,10 @@ class Home extends StatelessWidget {
               RaisedButton(
               onPressed:(){
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CameraScreen();
+                  return MyProfile();
                 },));
               },
-              child: Icon(Icons.surround_sound,
+              child: Icon(Icons.person,
                           size: 30,),
               ),
 

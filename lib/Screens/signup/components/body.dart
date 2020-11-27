@@ -70,6 +70,7 @@ class _BodyState extends State<Body> {
             ),
             SizedBox(height: size.height*0.1,
             ),
+            // ignore: missing_required_param
             RoundedButton(
               text: 'SIGN UP',
               press: () async{

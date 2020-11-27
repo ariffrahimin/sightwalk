@@ -32,6 +32,7 @@ class _BodyState extends State<Body> {
             Image(image: AssetImage('lib/asset/images/logo.png'),),
             Image(image: AssetImage('lib/asset/images/footsteps.png'),),
             
+            // ignore: missing_required_param
             RoundedButton(
               text: "REGISTER",
               press: (){
@@ -41,6 +42,7 @@ class _BodyState extends State<Body> {
                     return SignUpScreen();
                   },));
               },),
+            // ignore: missing_required_param
             RoundedButton(
               text: "LOGIN",
               press: (){
