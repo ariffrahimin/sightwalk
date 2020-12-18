@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
-import 'package:sightwalk/screens/profile/components/body.dart';
 //import 'package:flutter_dialogflow/flutter_dialogflow.dart';
 
 class Chatbot extends StatefulWidget {
