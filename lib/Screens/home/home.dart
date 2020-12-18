@@ -4,6 +4,8 @@ import 'package:sightwalk/screens/camera/camera_screen.dart';
 import 'package:sightwalk/screens/profile/profile.dart';
 import 'package:sightwalk/services/auth.dart';
 
+import '../Chatbot.dart';
+
 List<CameraDescription> cameras;
 
 class Home extends StatefulWidget {
@@ -88,6 +90,22 @@ class _HomeState extends State<Home> {
                 },
                 child: Icon(
                   Icons.person,
+                  size: 30,
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return Chatbot();
+                    },
+                  ));
+                },
+                child: Icon(
+                  Icons.chat,
                   size: 30,
                 ),
               ),
