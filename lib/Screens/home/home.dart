@@ -84,12 +84,12 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return MyProfile();
+                      return Chatbot();
                     },
                   ));
                 },
                 child: Icon(
-                  Icons.person,
+                  Icons.chat,
                   size: 30,
                 ),
               ),
@@ -100,12 +100,12 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return Chatbot();
+                      return MyProfile();
                     },
                   ));
                 },
                 child: Icon(
-                  Icons.chat,
+                  Icons.person,
                   size: 30,
                 ),
               ),
