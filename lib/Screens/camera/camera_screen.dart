@@ -19,6 +19,7 @@ class _LiveFeedState extends State<LiveFeed> {
   initCameras() async {}
   loadTfModel() async {
     await Tflite.loadModel(
+      // load tensorflow model and label from assets
       model: "assets/ssd_mobilenet.tflite",
       labels: "assets/ssd_mobilenet.txt",
     );

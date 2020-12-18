@@ -1,10 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:sightwalk/screens/camera/camera_screen.dart';
+import 'package:sightwalk/screens/chatbot/Assistance.dart';
 import 'package:sightwalk/screens/profile/profile.dart';
 import 'package:sightwalk/services/auth.dart';
 
-List<CameraDescription> cameras;
+List<CameraDescription> cameras; // initialize camera lists
 
 class Home extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CameraDescription> cameras;
-  final AuthService _auth = AuthService();
+  final AuthService _auth = AuthService(); //authentication object for service
 
   @override
   void initState() {
@@ -65,6 +66,7 @@ class _HomeState extends State<Home> {
               RaisedButton(
                 onPressed: () {
                   Navigator.push(
+                      //object detection page
                       context,
                       MaterialPageRoute(
                         builder: (context) => LiveFeed(cameras),
@@ -88,6 +90,22 @@ class _HomeState extends State<Home> {
                 },
                 child: Icon(
                   Icons.person,
+                  size: 30,
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return Chatbot();
+                    },
+                  ));
+                },
+                child: Icon(
+                  Icons.chat,
                   size: 30,
                 ),
               ),
