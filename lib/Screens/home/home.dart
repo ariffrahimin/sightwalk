@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:sightwalk/components/loading.dart';
 import 'package:sightwalk/screens/camera/camera_screen.dart';
 import 'package:sightwalk/screens/chatbot/Assistance.dart';
 import 'package:sightwalk/screens/profile/profile.dart';
@@ -97,8 +98,8 @@ class _HomeState extends State<Home> {
                 height: 12,
               ),
               RaisedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
+                onPressed: () async {
+                  await Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return MyProfile();
                     },
