@@ -8,6 +8,7 @@ String name;
 String age;
 Future getloc;
 String phoneNo;
+bool load = false;
 String firebaseuid = FirebaseAuth.instance.currentUser.uid.toString();
 final usersref = FirebaseFirestore.instance.collection('profile');
 
@@ -28,12 +29,9 @@ class _BodyState extends State<Body> {
         body: FutureBuilder(
             future: getloc,
             builder: (context, name) {
-              if (name == null) {
+              if (name == null || age == null || phoneNo == null) {
                 return Center(child: CircularProgressIndicator());
               } else {
-                while (name == null) {
-                  print('not connecting');
-                }
                 return profileView(context);
               }
             }));
