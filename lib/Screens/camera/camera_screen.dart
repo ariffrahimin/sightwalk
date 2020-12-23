@@ -47,7 +47,18 @@ class _LiveFeedState extends State<LiveFeed> {
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Real Time Object Detection"),
+        title: Text(
+          'Real Time Object Detection',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.amber[600],
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
       ),
       body: Stack(
         children: <Widget>[

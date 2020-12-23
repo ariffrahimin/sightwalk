@@ -9,6 +9,7 @@ class Chatbot extends StatefulWidget {
   @override
   _ChatbotState createState() => new _ChatbotState();
 }
+
 class _ChatbotState extends State<Chatbot> {
   final List<FactsMessage> _messages = <FactsMessage>[];
 
@@ -24,7 +25,8 @@ class _ChatbotState extends State<Chatbot> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _submitQuery,
-                decoration: InputDecoration.collapsed(hintText: "Send a message"),
+                decoration:
+                    InputDecoration.collapsed(hintText: "Send a message"),
               ),
             ),
             Container(
@@ -38,12 +40,13 @@ class _ChatbotState extends State<Chatbot> {
       ),
     );
   }
+
   void _dialogFlowResponse(query) async {
     _textController.clear();
     AuthGoogle authGoogle =
-    await AuthGoogle(fileJson: "assets/sightwalk.json").build();
+        await AuthGoogle(fileJson: "assets/sightwalk.json").build();
     Dialogflow dialogFlow =
-    Dialogflow(authGoogle: authGoogle, language: Language.english);
+        Dialogflow(authGoogle: authGoogle, language: Language.english);
     AIResponse response = await dialogFlow.detectIntent(query);
     FactsMessage message = FactsMessage(
       text: response.getMessage() ??
@@ -55,6 +58,7 @@ class _ChatbotState extends State<Chatbot> {
       _messages.insert(0, message);
     });
   }
+
   void _submitQuery(String text) {
     _textController.clear();
     FactsMessage message = new FactsMessage(
@@ -72,17 +76,27 @@ class _ChatbotState extends State<Chatbot> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(
+          'AI Assistant',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.amber[600],
+        elevation: 0,
         centerTitle: true,
-        title: Text("AI Assistant"),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
       ),
       body: Column(children: <Widget>[
         Flexible(
             child: ListView.builder(
-              padding: EdgeInsets.all(8.0),
-              reverse: true, //To keep the latest messages at the bottom
-              itemBuilder: (_, int index) => _messages[index],
-              itemCount: _messages.length,
-            )),
+          padding: EdgeInsets.all(8.0),
+          reverse: true, //To keep the latest messages at the bottom
+          itemBuilder: (_, int index) => _messages[index],
+          itemCount: _messages.length,
+        )),
         Divider(height: 1.0),
         Container(
           decoration: new BoxDecoration(color: Theme.of(context).cardColor),
@@ -92,6 +106,7 @@ class _ChatbotState extends State<Chatbot> {
     );
   }
 }
+
 class FactsMessage extends StatelessWidget {
   FactsMessage({this.text, this.name, this.type});
 
@@ -119,6 +134,7 @@ class FactsMessage extends StatelessWidget {
       ),
     ];
   }
+
   List<Widget> botMessage(context) {
     return <Widget>[
       Container(
@@ -129,8 +145,7 @@ class FactsMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(this.name,
-                style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(this.name, style: TextStyle(fontWeight: FontWeight.bold)),
             Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: Text(text),
@@ -151,5 +166,4 @@ class FactsMessage extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -39,18 +39,13 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.amber[200],
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text(
+          'Home',
+          style: TextStyle(color: Colors.black),
+        ),
         backgroundColor: Colors.amber[600],
         elevation: 0,
         centerTitle: true,
-        actions: [
-          FlatButton.icon(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              icon: Icon(Icons.person),
-              label: Text('logout')),
-        ],
       ),
       body: Container(
         alignment: Alignment.center,
