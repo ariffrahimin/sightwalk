@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sightwalk/components/loading.dart';
 import 'package:sightwalk/screens/camera/camera_screen.dart';
@@ -6,6 +7,7 @@ import 'package:sightwalk/screens/chatbot/Assistance.dart';
 import 'package:sightwalk/screens/profile/profile.dart';
 import 'package:sightwalk/services/auth.dart';
 
+String firebaseuid = FirebaseAuth.instance.currentUser.uid.toString();
 List<CameraDescription> cameras; // initialize camera lists
 
 class Home extends StatefulWidget {
@@ -40,9 +42,18 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.amber[200],
       appBar: AppBar(
         title: Text(
-          'Home',
+          firebaseuid,
           style: TextStyle(color: Colors.black),
         ),
+        actions: [
+          FlatButton.icon(
+              onPressed: () async {
+                await _auth.signOut();
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.person),
+              label: Text('logout')),
+        ],
         backgroundColor: Colors.amber[600],
         elevation: 0,
         centerTitle: true,
