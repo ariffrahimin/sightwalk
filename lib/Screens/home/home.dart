@@ -90,6 +90,9 @@ class _HomeState extends State<Home> {
           VoiceControllerOptions(),
         );
       });
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return Cash();
+      }));
     });
   }
 
