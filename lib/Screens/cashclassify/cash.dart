@@ -30,6 +30,7 @@ class _CashState extends State<Cash> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Money Classifier'),
+        backgroundColor: Colors.amberAccent,
       ),
       body: _loading
           ? Container(
