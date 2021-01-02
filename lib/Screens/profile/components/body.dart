@@ -1,9 +1,14 @@
+// import 'package:alan_voice/alan_voice.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sightwalk/Screens/camera/camera_screen.dart';
+import 'package:sightwalk/Screens/home/home.dart';
 import 'package:sightwalk/components/loading.dart';
 import 'package:sightwalk/screens/profile/components/profile_edit.dart';
 import 'package:sightwalk/services/auth.dart';
+
+import '../profile.dart';
 
 String name;
 String age;
@@ -24,6 +29,59 @@ class _BodyState extends State<Body> {
     getloc = getUser();
     super.initState();
   }
+
+  // _BodyState() {
+  //   AlanVoice.addButton(
+  //       "f18c82d486b0258e40767133e17cb02d2e956eca572e1d8b807a3e2338fdd0dc/stage",
+  //       buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
+
+  //   AlanVoice.callbacks.add((command) => _handleCommand(command.data));
+  // }
+
+  // void _handleCommand(Map<String, dynamic> command) {
+  //   switch (command["command"]) {
+  //     case "navigation":
+  //       _navigateTo(command["route"]);
+  //       break;
+  //     default:
+  //       debugPrint("Unknown command: ${command}");
+  //   }
+  // }
+
+  // void _navigateTo(String screen) {
+  //   switch (screen) {
+  //     case "profile":
+  //       Navigator.push(context, MaterialPageRoute(
+  //         builder: (context) {
+  //           return MyProfile();
+  //         },
+  //       ));
+  //       break;
+  //     case "back":
+  //       Navigator.pop(context);
+  //       break;
+  //     case "detection":
+  //       Navigator.push(context, MaterialPageRoute(
+  //         builder: (context) {
+  //           return LiveFeed(cameras);
+  //         },
+  //       ));
+  //       break;
+  //     case "home":
+  //       Navigator.push(context, MaterialPageRoute(
+  //         builder: (context) {
+  //           return Home();
+  //         },
+  //       ));
+  //       break;
+  //     case "logout":
+  //       _auth.signOut();
+  //       Navigator.pop(context);
+  //       break;
+  //     default:
+  //       print("Unknown screen: $screen");
+  //   }
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(

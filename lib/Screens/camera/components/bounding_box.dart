@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_text_to_speech/flutter_text_to_speech.dart';
 import 'dart:math' as math;
 
-class BoundingBox extends StatelessWidget {
+// import 'package:flutter_tts/flutter_tts.dart';
+
+// FlutterTts flutterTts = FlutterTts();
+
+class BoundingBox extends StatefulWidget {
   final List<dynamic> results;
   final int previewH;
   final int previewW;
@@ -17,28 +22,58 @@ class BoundingBox extends StatelessWidget {
   );
 
   @override
+  _BoundingBoxState createState() => _BoundingBoxState();
+}
+
+class _BoundingBoxState extends State<BoundingBox> {
+  VoiceController _voiceController;
+  @override
+  void initState() {
+    _voiceController = FlutterTextToSpeech.instance.voiceController();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     List<Widget> _renderBox() {
-      return results.map((re) {
+      return widget.results.map((re) {
         var _x = re["rect"]["x"];
         var _w = re["rect"]["w"];
         var _y = re["rect"]["y"];
         var _h = re["rect"]["h"];
         var scaleW, scaleH, x, y, w, h;
 
-        if (screenH / screenW > previewH / previewW) {
-          scaleW = screenH / previewH * previewW;
-          scaleH = screenH;
-          var difW = (scaleW - screenW) / scaleW;
+        Future _playVoice() async {
+          String text = re["detectedClass"];
+          try {
+            await _voiceController.init().then((_) {
+              _voiceController.speak(
+                text,
+                VoiceControllerOptions(),
+              );
+            });
+          } catch (e) {
+            _voiceController.stop();
+          }
+        }
+
+        if (widget.screenH / widget.screenW >
+            widget.previewH / widget.previewW) {
+          scaleW = widget.screenH / widget.previewH * widget.previewW;
+          scaleH = widget.screenH;
+          var difW = (scaleW - widget.screenW) / scaleW;
           x = (_x - difW / 2) * scaleW;
           w = _w * scaleW;
           if (_x < difW / 2) w -= (difW / 2 - _x) * scaleW;
           y = _y * scaleH;
           h = _h * scaleH;
+          // print(re["detectedClass"]);
+          _playVoice();
         } else {
-          scaleH = screenW / previewW * previewH;
-          scaleW = screenW;
-          var difH = (scaleH - screenH) / scaleH;
+          scaleH = widget.screenW / widget.previewW * widget.previewH;
+          scaleW = widget.screenW;
+          var difH = (scaleH - widget.screenH) / scaleH;
           x = _x * scaleW;
           w = _w * scaleW;
           y = (_y - difH / 2) * scaleH;

@@ -1,0 +1,9 @@
+0 1 ringgit
+1 5 ringgit
+2 10 ringgit
+3 20 ringgit
+4 50 ringgit
+5 5 sen
+6 10 sen
+7 20 sen
+8 50 sen

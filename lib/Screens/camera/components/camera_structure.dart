@@ -41,17 +41,19 @@ class _CameraFeedState extends State<CameraFeed> {
           if (!isDetecting) {
             isDetecting = true;
             Tflite.detectObjectOnFrame(
-              bytesList: img.planes.map((plane) {
-                return plane.bytes;
-              }).toList(),
-              model: "SSDMobileNet",
-              imageHeight: img.height,
-              imageWidth: img.width,
-              imageMean: 127.5,
-              imageStd: 127.5,
-              numResultsPerClass: 1,
-              threshold: 0.4,
-            ).then((recognitions) {
+                    bytesList: img.planes.map((plane) {
+                      return plane.bytes;
+                    }).toList(),
+                    model: "SSDMobileNet",
+                    imageHeight: img.height,
+                    imageWidth: img.width,
+                    imageMean: 127.5,
+                    imageStd: 127.5,
+                    numResultsPerClass: 1,
+                    blockSize: 1,
+                    threshold: 0.6,
+                    numBoxesPerBlock: 1)
+                .then((recognitions) {
               /*
               When setRecognitions is called here, the parameters are being passed on to the parent widget as callback. i.e. to the LiveFeed class
                */

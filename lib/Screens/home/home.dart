@@ -1,13 +1,17 @@
 import 'package:camera/camera.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sightwalk/components/loading.dart';
-import 'package:sightwalk/screens/camera/camera_screen.dart';
-import 'package:sightwalk/screens/chatbot/Assistance.dart';
-import 'package:sightwalk/screens/profile/profile.dart';
+import 'package:flutter_text_to_speech/flutter_text_to_speech.dart';
+import 'package:sightwalk/Screens/camera/camera_screen.dart';
+import 'package:sightwalk/Screens/cashclassify/cash.dart';
+import 'package:flutter_button/3d/3d_button.dart';
+import 'package:sightwalk/Screens/profile/profile.dart';
 import 'package:sightwalk/services/auth.dart';
+import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
-String firebaseuid = FirebaseAuth.instance.currentUser.uid.toString();
+//Voice guide for initialization -> User hear voice to guide towards the button.
+//butang besar-besar
+// import 'package:alan_voice/alan_voice.dart';
+
 List<CameraDescription> cameras; // initialize camera lists
 
 class Home extends StatefulWidget {
@@ -19,8 +23,10 @@ class _HomeState extends State<Home> {
   List<CameraDescription> cameras;
   final AuthService _auth = AuthService(); //authentication object for service
 
+  VoiceController _voiceController;
   @override
   void initState() {
+    _voiceController = FlutterTextToSpeech.instance.voiceController();
     super.initState();
     _setupCameras();
   }
@@ -36,28 +42,62 @@ class _HomeState extends State<Home> {
     }
   }
 
+  void voiceObj() {
+    setState(() {
+      print("Object Detection");
+      _voiceController.init().then((_) {
+        _voiceController.speak(
+          "This button Lead to Object Detection Page, Hold to confirm",
+          VoiceControllerOptions(),
+        );
+      });
+    });
+  }
+
+  void confirmObj() {
+    setState(() {
+      print("Object Detection");
+      _voiceController.init().then((_) {
+        _voiceController.speak(
+          "Navigating to Object Detection",
+          VoiceControllerOptions(),
+        );
+      });
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return LiveFeed(cameras);
+      }));
+    });
+  }
+
+  void voiceCash() {
+    setState(() {
+      print("Money classifier");
+      _voiceController.init().then((_) {
+        _voiceController.speak(
+          "This button Lead to Money classifier Page, Hold to confirm",
+          VoiceControllerOptions(),
+        );
+      });
+    });
+  }
+
+  void confirmCash() {
+    setState(() {
+      print("Money classifier");
+      _voiceController.init().then((_) {
+        _voiceController.speak(
+          "Navigating to Money classifier",
+          VoiceControllerOptions(),
+        );
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    double buttonheight = 320;
     return Scaffold(
       backgroundColor: Colors.amber[200],
-      appBar: AppBar(
-        title: Text(
-          firebaseuid,
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: [
-          FlatButton.icon(
-              onPressed: () async {
-                await _auth.signOut();
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.person),
-              label: Text('logout')),
-        ],
-        backgroundColor: Colors.amber[600],
-        elevation: 0,
-        centerTitle: true,
-      ),
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -70,35 +110,66 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                      //object detection page
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LiveFeed(cameras),
-                      ));
-                },
-                child: Icon(
-                  Icons.camera_alt,
-                  size: 30,
+              SimpleGestureDetector(
+                child: Button3D(
+                  style: StyleOf3dButton(
+                    backColor: Colors.amber[900],
+                    topColor: Colors.amber,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  height: buttonheight,
+                  width: 350,
+                  onPressed: () {
+                    voiceObj();
+                  },
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      new Image.asset('assets/images/eye2.png',
+                          height: 60.0, width: 60.0),
+                      Padding(
+                          padding: EdgeInsets.only(left: 10.0),
+                          child: new Text(
+                            "Object Detection ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15.0),
+                          ))
+                    ],
+                  ),
                 ),
+                onLongPress: confirmObj,
               ),
               SizedBox(
                 height: 12,
               ),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return Chatbot();
-                    },
-                  ));
-                },
-                child: Icon(
-                  Icons.chat,
-                  size: 30,
+              SimpleGestureDetector(
+                child: Button3D(
+                  style: StyleOf3dButton(
+                    backColor: Colors.amber[900],
+                    topColor: Colors.amber,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  height: buttonheight,
+                  width: 350,
+                  onPressed: () {
+                    voiceCash();
+                  },
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      new Image.asset('assets/images/money.png',
+                          height: 60.0, width: 60.0),
+                      Padding(
+                          padding: EdgeInsets.only(left: 10.0),
+                          child: new Text(
+                            "Money Classifier  ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15.0),
+                          ))
+                    ],
+                  ),
                 ),
+                onLongPress: confirmCash,
               ),
               SizedBox(
                 height: 12,

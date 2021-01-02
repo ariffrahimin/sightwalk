@@ -1,5 +1,8 @@
+// import 'package:alan_voice/alan_voice.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:sightwalk/Screens/home/home.dart';
+import 'package:sightwalk/Screens/profile/profile.dart';
 import 'components/bounding_box.dart';
 import 'components/camera_structure.dart';
 import 'dart:math' as math;
@@ -13,6 +16,55 @@ class LiveFeed extends StatefulWidget {
 }
 
 class _LiveFeedState extends State<LiveFeed> {
+  // _LiveFeedState() {
+  //   AlanVoice.addButton(
+  //       "f18c82d486b0258e40767133e17cb02d2e956eca572e1d8b807a3e2338fdd0dc/stage",
+  //       buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
+
+  //   AlanVoice.callbacks.add((command) => _handleCommand(command.data));
+  // }
+
+  // void _handleCommand(Map<String, dynamic> command) {
+  //   switch (command["command"]) {
+  //     case "navigation":
+  //       _navigateTo(command["route"]);
+  //       break;
+  //     default:
+  //       debugPrint("Unknown command: ${command}");
+  //   }
+  // }
+
+  // void _navigateTo(String screen) {
+  //   switch (screen) {
+  //     case "profile":
+  //       Navigator.push(context, MaterialPageRoute(
+  //         builder: (context) {
+  //           return MyProfile();
+  //         },
+  //       ));
+  //       break;
+  //     case "back":
+  //       Navigator.pop(context);
+  //       break;
+  //     case "detection":
+  //       print("already in object detection");
+
+  //       break;
+  //     case "home":
+  //       Navigator.push(context, MaterialPageRoute(
+  //         builder: (context) {
+  //           return Home();
+  //         },
+  //       ));
+  //       break;
+  //     case "logout":
+  //       print("go to profile first");
+  //       break;
+  //     default:
+  //       print("Unknown screen: $screen");
+  //   }
+  // }
+
   List<dynamic> _recognitions;
   int _imageHeight = 0;
   int _imageWidth = 0;
