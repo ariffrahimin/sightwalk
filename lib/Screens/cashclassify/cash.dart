@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
+import 'package:flutter_text_to_speech/flutter_text_to_speech.dart';
 
 class Cash extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class Cash extends StatefulWidget {
 }
 
 class _CashState extends State<Cash> {
+  VoiceController _voiceController;
   List _outputs;
   File _image;
   bool _loading = false;
@@ -16,6 +18,7 @@ class _CashState extends State<Cash> {
   @override
   void initState() {
     super.initState();
+    _voiceController = FlutterTextToSpeech.instance.voiceController();
     _loading = true;
 
     loadModel().then((value) {
@@ -56,7 +59,7 @@ class _CashState extends State<Cash> {
                             background: Paint()..color = Colors.white,
                           ),
                         )
-                      : Container()
+                      : Container(),
                 ],
               ),
             ),
@@ -81,6 +84,20 @@ class _CashState extends State<Cash> {
     classifyImage(image);
   }
 
+  voicefunct() {
+    setState(() {
+      print("Object Detection");
+      String string = _outputs[0]["label"].toString();
+      String slice = string.substring(1, string.length);
+      _voiceController.init().then((_) {
+        _voiceController.speak(
+          slice,
+          VoiceControllerOptions(),
+        );
+      });
+    });
+  }
+
   classifyImage(File image) async {
     var output = await Tflite.runModelOnImage(
       path: image.path,
@@ -92,6 +109,7 @@ class _CashState extends State<Cash> {
     setState(() {
       _loading = false;
       _outputs = output;
+      voicefunct();
     });
   }
 

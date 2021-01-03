@@ -45,6 +45,7 @@ class _BoundingBoxState extends State<BoundingBox> {
         var scaleW, scaleH, x, y, w, h;
 
         Future _playVoice() async {
+          print(re["detectedClass"].toString().length);
           String text = re["detectedClass"];
           try {
             await _voiceController.init().then((_) {
@@ -68,6 +69,9 @@ class _BoundingBoxState extends State<BoundingBox> {
           if (_x < difW / 2) w -= (difW / 2 - _x) * scaleW;
           y = _y * scaleH;
           h = _h * scaleH;
+          // for(var i = 0; i>){
+
+          // }
           // print(re["detectedClass"]);
           _playVoice();
         } else {
