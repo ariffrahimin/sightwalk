@@ -4,6 +4,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 import 'package:flutter_text_to_speech/flutter_text_to_speech.dart';
 
+String string;
+String slice;
+
 class Cash extends StatefulWidget {
   @override
   _CashState createState() => _CashState();
@@ -52,7 +55,7 @@ class _CashState extends State<Cash> {
                   ),
                   _outputs != null
                       ? Text(
-                          "${_outputs[0]["label"]}",
+                          slice,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20.0,
@@ -87,8 +90,8 @@ class _CashState extends State<Cash> {
   voicefunct() {
     setState(() {
       print("Object Detection");
-      String string = _outputs[0]["label"].toString();
-      String slice = string.substring(1, string.length);
+      string = _outputs[0]["label"].toString();
+      slice = string.substring(1, string.length);
       _voiceController.init().then((_) {
         _voiceController.speak(
           slice,
@@ -109,6 +112,8 @@ class _CashState extends State<Cash> {
     setState(() {
       _loading = false;
       _outputs = output;
+      string = _outputs[0]["label"].toString();
+      slice = string.substring(1, string.length);
       voicefunct();
     });
   }
