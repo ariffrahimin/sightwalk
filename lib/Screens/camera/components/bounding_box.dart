@@ -46,7 +46,7 @@ class _BoundingBoxState extends State<BoundingBox> {
 
         Future _playVoice() async {
           print(re["detectedClass"].toString().length);
-          String text = re["detectedClass"];
+          String text = re["detectedClass"].toString();
           try {
             await _voiceController.init().then((_) {
               _voiceController.speak(

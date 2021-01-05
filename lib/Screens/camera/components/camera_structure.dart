@@ -51,7 +51,7 @@ class _CameraFeedState extends State<CameraFeed> {
                     imageStd: 127.5,
                     numResultsPerClass: 1,
                     blockSize: 1,
-                    threshold: 0.6,
+                    threshold: 0.7,
                     numBoxesPerBlock: 1)
                 .then((recognitions) {
               /*
