@@ -28,7 +28,16 @@ class _HomeState extends State<Home> {
   void initState() {
     _voiceController = FlutterTextToSpeech.instance.voiceController();
     super.initState();
-    _setupCameras();
+    _setupCameras().then((value) {
+      setState(() {
+        _voiceController.init().then((_) {
+          _voiceController.speak(
+            "Welcome to sightwalk, for instructions, please swipe to the right",
+            VoiceControllerOptions(),
+          );
+        });
+      });
+    });
   }
 
   Future<void> _setupCameras() async {
@@ -69,6 +78,18 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void intro() {
+    setState(() {
+      print("Money classifier");
+      _voiceController.init().then((_) {
+        _voiceController.speak(
+          "There are two big buttons on the screen, at the top side, is the Realtime Object Detection Module, at the bottom side, is the money classification module. Tap once at the screen to identify the buttons",
+          VoiceControllerOptions(),
+        );
+      });
+    });
+  }
+
   void voiceCash() {
     setState(() {
       print("Money classifier");
@@ -99,101 +120,109 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     double buttonheight = 320;
-    return Scaffold(
-      backgroundColor: Colors.amber[200],
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/background.png'),
-              alignment: Alignment.topCenter,
-              fit: BoxFit.cover),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SimpleGestureDetector(
-                child: Button3D(
-                  style: StyleOf3dButton(
-                    backColor: Colors.amber[900],
-                    topColor: Colors.amber,
-                    borderRadius: BorderRadius.circular(30),
+    return GestureDetector(
+        child: Scaffold(
+          backgroundColor: Colors.amber[200],
+          body: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  alignment: Alignment.topCenter,
+                  fit: BoxFit.cover),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SimpleGestureDetector(
+                    child: Button3D(
+                      style: StyleOf3dButton(
+                        backColor: Colors.amber[900],
+                        topColor: Colors.amber,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      height: buttonheight,
+                      width: 350,
+                      onPressed: () {
+                        voiceObj();
+                      },
+                      child: new Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          new Image.asset('assets/images/eye2.png',
+                              height: 60.0, width: 60.0),
+                          Padding(
+                              padding: EdgeInsets.only(left: 10.0),
+                              child: new Text(
+                                "Object Detection ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0),
+                              ))
+                        ],
+                      ),
+                    ),
+                    onLongPress: confirmObj,
                   ),
-                  height: buttonheight,
-                  width: 350,
-                  onPressed: () {
-                    voiceObj();
-                  },
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      new Image.asset('assets/images/eye2.png',
-                          height: 60.0, width: 60.0),
-                      Padding(
-                          padding: EdgeInsets.only(left: 10.0),
-                          child: new Text(
-                            "Object Detection ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15.0),
-                          ))
-                    ],
+                  SizedBox(
+                    height: 12,
                   ),
-                ),
-                onLongPress: confirmObj,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              SimpleGestureDetector(
-                child: Button3D(
-                  style: StyleOf3dButton(
-                    backColor: Colors.amber[900],
-                    topColor: Colors.amber,
-                    borderRadius: BorderRadius.circular(30),
+                  SimpleGestureDetector(
+                    child: Button3D(
+                      style: StyleOf3dButton(
+                        backColor: Colors.amber[900],
+                        topColor: Colors.amber,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      height: buttonheight,
+                      width: 350,
+                      onPressed: () {
+                        voiceCash();
+                      },
+                      child: new Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          new Image.asset('assets/images/money.png',
+                              height: 60.0, width: 60.0),
+                          Padding(
+                              padding: EdgeInsets.only(left: 10.0),
+                              child: new Text(
+                                "Money Classifier  ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0),
+                              ))
+                        ],
+                      ),
+                    ),
+                    onLongPress: confirmCash,
                   ),
-                  height: buttonheight,
-                  width: 350,
-                  onPressed: () {
-                    voiceCash();
-                  },
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      new Image.asset('assets/images/money.png',
-                          height: 60.0, width: 60.0),
-                      Padding(
-                          padding: EdgeInsets.only(left: 10.0),
-                          child: new Text(
-                            "Money Classifier  ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15.0),
-                          ))
-                    ],
+                  SizedBox(
+                    height: 12,
                   ),
-                ),
-                onLongPress: confirmCash,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              RaisedButton(
-                onPressed: () async {
-                  await Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return MyProfile();
+                  RaisedButton(
+                    onPressed: () async {
+                      await Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return MyProfile();
+                        },
+                      ));
                     },
-                  ));
-                },
-                child: Icon(
-                  Icons.person,
-                  size: 30,
-                ),
+                    child: Icon(
+                      Icons.person,
+                      size: 30,
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
-    );
+        onHorizontalDragEnd: (details) {
+          if (details.primaryVelocity > 0) {
+            intro();
+          }
+        });
   }
 }

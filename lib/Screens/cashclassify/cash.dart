@@ -27,49 +27,64 @@ class _CashState extends State<Cash> {
     loadModel().then((value) {
       setState(() {
         _loading = false;
+        _voiceController.init().then((_) {
+          _voiceController.speak(
+            "Slide to the left to take a picture, and slide to the right to navigate back home",
+            VoiceControllerOptions(),
+          );
+        });
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Money Classifier'),
-        backgroundColor: Colors.amberAccent,
-      ),
-      body: _loading
-          ? Container(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(),
-            )
-          : Container(
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _image == null ? Container() : Image.file(_image),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  _outputs != null
-                      ? Text(
-                          slice,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            background: Paint()..color = Colors.white,
-                          ),
-                        )
-                      : Container(),
-                ],
+    return GestureDetector(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Money Classifier'),
+          backgroundColor: Colors.amberAccent,
+        ),
+        body: _loading
+            ? Container(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              )
+            : Container(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _image == null ? Container() : Image.file(_image),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    _outputs != null
+                        ? Text(
+                            slice,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20.0,
+                              background: Paint()..color = Colors.white,
+                            ),
+                          )
+                        : Container(),
+                  ],
+                ),
               ),
-            ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: pickImage,
-        child: Icon(Icons.image),
+        floatingActionButton: FloatingActionButton(
+          onPressed: pickImage,
+          child: Icon(Icons.image),
+        ),
       ),
+      onHorizontalDragEnd: (details) {
+        if (details.primaryVelocity < 0) {
+          pickImage();
+        } else if (details.primaryVelocity > 0) {
+          Navigator.pop(context);
+        }
+      },
     );
   }
 
@@ -120,8 +135,8 @@ class _CashState extends State<Cash> {
 
   loadModel() async {
     await Tflite.loadModel(
-      model: "assets/model_unquant.tflite",
-      labels: "assets/labels.txt",
+      model: "assets/modelv1.tflite",
+      labels: "assets/labelsv1.txt",
     );
   }
 

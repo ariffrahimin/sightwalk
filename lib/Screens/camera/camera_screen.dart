@@ -7,6 +7,7 @@ import 'components/bounding_box.dart';
 import 'components/camera_structure.dart';
 import 'dart:math' as math;
 import 'package:tflite/tflite.dart';
+import 'package:flutter_text_to_speech/flutter_text_to_speech.dart';
 
 class LiveFeed extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -16,55 +17,7 @@ class LiveFeed extends StatefulWidget {
 }
 
 class _LiveFeedState extends State<LiveFeed> {
-  // _LiveFeedState() {
-  //   AlanVoice.addButton(
-  //       "f18c82d486b0258e40767133e17cb02d2e956eca572e1d8b807a3e2338fdd0dc/stage",
-  //       buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
-
-  //   AlanVoice.callbacks.add((command) => _handleCommand(command.data));
-  // }
-
-  // void _handleCommand(Map<String, dynamic> command) {
-  //   switch (command["command"]) {
-  //     case "navigation":
-  //       _navigateTo(command["route"]);
-  //       break;
-  //     default:
-  //       debugPrint("Unknown command: ${command}");
-  //   }
-  // }
-
-  // void _navigateTo(String screen) {
-  //   switch (screen) {
-  //     case "profile":
-  //       Navigator.push(context, MaterialPageRoute(
-  //         builder: (context) {
-  //           return MyProfile();
-  //         },
-  //       ));
-  //       break;
-  //     case "back":
-  //       Navigator.pop(context);
-  //       break;
-  //     case "detection":
-  //       print("already in object detection");
-
-  //       break;
-  //     case "home":
-  //       Navigator.push(context, MaterialPageRoute(
-  //         builder: (context) {
-  //           return Home();
-  //         },
-  //       ));
-  //       break;
-  //     case "logout":
-  //       print("go to profile first");
-  //       break;
-  //     default:
-  //       print("Unknown screen: $screen");
-  //   }
-  // }
-
+  VoiceController _voiceController;
   List<dynamic> _recognitions;
   int _imageHeight = 0;
   int _imageWidth = 0;
@@ -90,40 +43,56 @@ class _LiveFeedState extends State<LiveFeed> {
 
   @override
   void initState() {
+    _voiceController = FlutterTextToSpeech.instance.voiceController();
     super.initState();
-    loadTfModel();
+    loadTfModel().then((value) {
+      setState(() {
+        _voiceController.init().then((_) {
+          _voiceController.speak(
+            "slide to the right to navigate back home",
+            VoiceControllerOptions(),
+          );
+        });
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Real Time Object Detection',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.amber[600],
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-      ),
-      body: Stack(
-        children: <Widget>[
-          CameraFeed(widget.cameras, setRecognitions),
-          BoundingBox(
-            _recognitions == null ? [] : _recognitions,
-            math.max(_imageHeight, _imageWidth),
-            math.min(_imageHeight, _imageWidth),
-            screen.height,
-            screen.width,
+    return GestureDetector(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Real Time Object Detection',
+              style: TextStyle(color: Colors.black),
+            ),
+            backgroundColor: Colors.amber[600],
+            elevation: 0,
+            centerTitle: true,
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
           ),
-        ],
-      ),
-    );
+          body: Stack(
+            children: <Widget>[
+              CameraFeed(widget.cameras, setRecognitions),
+              BoundingBox(
+                _recognitions == null ? [] : _recognitions,
+                math.max(_imageHeight, _imageWidth),
+                math.min(_imageHeight, _imageWidth),
+                screen.height,
+                screen.width,
+              ),
+            ],
+          ),
+        ),
+        onHorizontalDragEnd: (details) {
+          if (details.primaryVelocity > 0) {
+            Navigator.pop(context);
+          }
+        });
   }
 }
