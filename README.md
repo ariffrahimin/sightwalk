@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Sightwalk" />
+  <img src="images/hello.gif" alt="Sightwalk" />
 
 &#xa0;
 
@@ -34,12 +34,25 @@
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
-  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/ariffrahimin" target="_blank">Author</a>
+  The visually impaired community often need human guides or guide dogs/seeing-eye dogs to assist them in their daily lives but to some, this might be a privilege as they might not have the access to both which may put their lives in danger and make it harder for them to do their daily tasks. Sight Walk is a mobile application that will assist the visually impaired community virtually. It will be able to detect objects and obstacles around them. When there are objects detected, the mobile application will then alert the user. Not only that, Sight Walk Application can also differentiate money and classify them. This helps the visually impaired community to be more organized of their money and during cash transactions. Next, the visually impaired community requires audible signals to do things on their own in their daily lives. Therefore, a speech synthesis module is used for navigation.
+  <a href="#sparkles-features">Problem Statement</a> &#xa0; | &#xa0;
+  1.	Most of the applications on the market are inconvenient for the visually impaired community to use as the content of those application are mostly in text or images instead of voice. 
+  2.	It is difficult for the visually impaired community to do things on their own in their daily lives when there is no one to assist them.
+  3.	The Braille markings on cash notes may fade over time and not everyone understands Braille.
+  4.	Bill Readers are not available in Malaysia.
+
+<a href="#rocket-technologies">Objectives</a> &#xa0; | &#xa0;
+
+1. To design a mobile application to assist the visually impaired community in their daily lives.
+2. To implement object detection for detecting obstacles to alert the user.
+3. To develop image processing to classify money.
+4. To construct a speech synthesis for the application’s navigation and to inform the user of the object detected and the money classified.
+
+<a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+<a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+<a href="#memo-license">License</a> &#xa0; | &#xa0;
+<a href="https://github.com/ariffrahimin" target="_blank">Author</a>
+
 </p>
 
 <br>
@@ -50,9 +63,16 @@ Describe your project
 
 ## :sparkles: Features
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+:heavy_check_mark: Speech Synthesis
+
+- Assists user for navigation
+- Informs the user of the object/money detected
+  :heavy_check_mark: Money Classifier
+- Classifies money based in the amount
+  :heavy_check_mark: Object Detection
+- Detects objects in real time
+  :heavy_check_mark: Database
+- stores user information
 
 ## :rocket: Technologies
 
@@ -61,6 +81,7 @@ The following tools were used in this project:
 - [Flutter](https://flutter.dev/)
 - [Android Studio](https://developer.android.com/studio)
 - [Tensorflow](https://www.tensorflow.org)
+- [Firebase](https://firebase.google.com)
 
 ## :white_check_mark: Requirements
 
