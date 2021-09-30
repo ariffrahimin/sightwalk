@@ -109,6 +109,11 @@ run flutter project
 If it does not work, try to use your phone in debug mode
 ```
 
+## :movie_camera: App Demo Video
+
+- Click here to watch our presentation! :wink:
+  [![sightwalk](https://github.comariffrahimin/sightwalk/images/thumbnail.jpg)](https://www.youtube.com/watch?v=Ftm2_stdv9s "Sightwalk Mobile App")
+
 ## :memo: License
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
