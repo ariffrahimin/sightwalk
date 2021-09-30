@@ -86,8 +86,7 @@ The following tools were used in this project:
 
 ## :white_check_mark: Requirements
 
-- [Android Studio](https://developer.android.com/studio)
-  Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) , [Android Studio](https://developer.android.com/studio) and [Visual Studio Code](https://code.visualstudio.com) installed.
+- Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) , [Android Studio](https://developer.android.com/studio) and [Visual Studio Code](https://code.visualstudio.com) installed.
 
 ## :checkered_flag: Starting
 
