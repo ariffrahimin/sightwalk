@@ -111,6 +111,9 @@ If it does not work, try to use your phone in debug mode
 
 ## :movie_camera: App Demo Video
 
+- This one of the Features in the app, Money Classifier
+  <img src="images/money_class.gif" alt="Money Classifier" />
+
 - Click here to watch our presentation! :wink:
 
 [![sightwalk](https://github.com/ariffrahimin/sightwalk/blob/master/images/thumbnail.jpg)](https://www.youtube.com/watch?v=Ftm2_stdv9s "Sightwalk Mobile App")
