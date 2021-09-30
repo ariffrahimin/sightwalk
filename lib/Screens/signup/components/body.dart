@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sightwalk/Screens/home/home.dart';
 import 'package:sightwalk/Screens/login/login.dart';
 import 'package:sightwalk/components/exist_acount.dart';
 import 'package:sightwalk/components/round_button.dart';

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sightwalk/Screens/login/login.dart';
 import 'package:sightwalk/Screens/signup/signup.dart';
 import 'package:sightwalk/components/round_button.dart';
-import 'package:sightwalk/services/auth.dart';
 
 class Body extends StatefulWidget {
   @override

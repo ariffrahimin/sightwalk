@@ -1,8 +1,6 @@
 // import 'package:alan_voice/alan_voice.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:sightwalk/Screens/home/home.dart';
-import 'package:sightwalk/Screens/profile/profile.dart';
 import 'components/bounding_box.dart';
 import 'components/camera_structure.dart';
 import 'dart:math' as math;

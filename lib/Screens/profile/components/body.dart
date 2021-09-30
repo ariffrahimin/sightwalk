@@ -2,14 +2,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sightwalk/Screens/camera/camera_screen.dart';
-import 'package:sightwalk/Screens/home/home.dart';
 import 'package:sightwalk/components/loading.dart';
 import 'package:sightwalk/screens/profile/components/profile_edit.dart';
 import 'package:sightwalk/services/auth.dart';
 import 'package:flutter_text_to_speech/flutter_text_to_speech.dart';
-
-import '../profile.dart';
 
 String name;
 String age;

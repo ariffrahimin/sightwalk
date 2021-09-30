@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sightwalk/screens/login/login.dart';
 import 'package:sightwalk/screens/welcome/welcome_screen.dart';
 
 class Authenticate extends StatefulWidget {
@@ -12,7 +11,6 @@ class _AuthenticateState extends State<Authenticate> {
   Widget build(BuildContext context) {
     return Container(
       child: WelcomeScreen(),
-      
     );
   }
 }
