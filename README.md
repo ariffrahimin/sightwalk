@@ -58,21 +58,23 @@
 
 <br>
 
-## :dart: About
-
-Describe your project
-
 ## :sparkles: Features
 
 :heavy_check_mark: Speech Synthesis
 
 - Assists user for navigation
 - Informs the user of the object/money detected
-  :heavy_check_mark: Money Classifier
+
+:heavy_check_mark: Money Classifier
+
 - Classifies money based in the amount
-  :heavy_check_mark: Object Detection
+
+:heavy_check_mark: Object Detection
+
 - Detects objects in real time
-  :heavy_check_mark: Database
+
+:heavy_check_mark: Database
+
 - stores user information
 
 ## :rocket: Technologies
