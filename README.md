@@ -35,8 +35,8 @@
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
   The visually impaired community often need human guides or guide dogs/seeing-eye dogs to assist them in their daily lives but to some, this might be a privilege as they might not have the access to both which may put their lives in danger and make it harder for them to do their daily tasks. Sight Walk is a mobile application that will assist the visually impaired community virtually. It will be able to detect objects and obstacles around them. When there are objects detected, the mobile application will then alert the user. Not only that, Sight Walk Application can also differentiate money and classify them. This helps the visually impaired community to be more organized of their money and during cash transactions. Next, the visually impaired community requires audible signals to do things on their own in their daily lives. Therefore, a speech synthesis module is used for navigation.
-  <a href="#sparkles-features">Problem Statement</a> &#xa0; | &#xa0;
-
+  
+<a href="#sparkles-features">Problem Statement</a> &#xa0; | &#xa0;
 1.  Most of the applications on the market are inconvenient for the visually impaired community to use as the content of those application are mostly in text or images instead of voice.
 2.  It is difficult for the visually impaired community to do things on their own in their daily lives when there is no one to assist them.
 3.  The Braille markings on cash notes may fade over time and not everyone understands Braille.
