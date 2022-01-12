@@ -34,7 +34,7 @@
 
 <p align="center">
 <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-<a href="#newspaper-problem_statement">Problem Statement</a> &#xa0; | &#xa0;
+<a href="#newspaper-problem-statement">Problem Statement</a> &#xa0; | &#xa0;
 <a href="#fire-objectives">Objectives</a> &#xa0; | &#xa0;
 <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
 <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
